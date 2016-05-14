@@ -38,9 +38,12 @@ var Author = React.createClass({
 //  It doesn't works yet. TODO: Work on making categories tab function properly.
 
 var Categories = React.createClass({
+	getInitialState: function () {
+		return {url: 'famous'};
+	},
 	render: function () {
 		var cat_array = ["Programming", "Movies", "Famous"];
-//  TODO: Why does clicking on a link with empty string in it's href tag reloads the whole page?
+//  TODO: Why does clicking on a link with href="" reloads the whole page?
 		return (
 			<div className="cat_tab">
 			<ul className="cat_list">
@@ -62,7 +65,7 @@ var Categories = React.createClass({
 //  updateView is passed to onClick handler of button to update Quote and Author when the button is clicked.
 var QuoteBlock = React.createClass({
 	getInitialState: function () {
-		return {quote: "New Quote here", author: "Quote's Author here"};
+		return {quote: "New Quote here", author: "Who said it?"};
 	},
 	updateView: function () {
 		$.ajax({
