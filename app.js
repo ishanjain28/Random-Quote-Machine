@@ -41,14 +41,17 @@ var Categories = React.createClass({
 	getInitialState: function () {
 		return {url: 'famous'};
 	},
+
+	// TODO: I think I should do this using props and states.. I will think about this and I will do it within 3 days.
 	render: function () {
-		var cat_array = ["Programming", "Movies", "Famous"];
+		var cat_array = ["Movies", "Famous"];
 //  TODO: Why does clicking on a link with href="" reloads the whole page?
+		//  Find out a way to make Categories work.. Goes against the React way of not messing with Actual DOM.. But It's easier, works and I am not doing any resource consuming work here.
 		return (
 			<div className="cat_tab">
 			<ul className="cat_list">
 			{cat_array.map(function (cat) {
-				return <a key={cat} className="cat_list_element">
+				return <a key={cat} className="cat_list_element" id="inactive_cat">
 					<li>
 					<i>{"#" + cat}</i>
 					</li>
@@ -74,16 +77,19 @@ var QuoteBlock = React.createClass({
 			cache: true,
 			headers: {'X-Mashape-Key': 'j2rbmAvhvimshrTJkUHtmBEceNbgp1WJRG6jsnVVTDboDxcAIR', 'Cache-Control': 'max-age=1000'},
 			success: function (data) {
+				//  Update Quote and Author. Placed this first, because changing Background doesn't takes time but loading new quote takes time. So, now it'll update the backgroundColor after updating quote and author
 				this.setState({quote: data['quote'], author: data['author']});
+
+				//  Code to Randomly change Background Color on Every New_Quote Click.
+				var colors = ["#f78822", "#4a742c", "#e12828", "#FEC202", "#DA2021", "#527AC0", "#13ACD8", "#689550", "#E53059", "#6E4C96"], currentColor = Math.floor(Math.random() * (colors.length - 1));
+				var body = document.getElementById('body');
+				body.style.backgroundColor = colors[currentColor];
+
 			}.bind(this),
 			error: function (xhr, status, err) {
 				console.error(this.props.url, err.toString());
 			}.bind(this)
 		});
-//  Code to Randomly change Background Color on Every New_Quote Click.
-		var colors = ["#f78822", "#4a742c", "#e12828", "#FEC202", "#DA2021", "#527AC0", "#13ACD8", "#689550", "#E53059", "#6E4C96"], currentColor = Math.floor(Math.random() * (colors.length - 1));
-		var body = document.getElementById('body');
-		body.style.backgroundColor = colors[currentColor];
 	},
 
 //        If I return this.updateView in componentDidMount, It doesn't makes Ajax calls.
@@ -140,7 +146,7 @@ var RootElement = React.createClass({
 		return (
 			<div className="RootElement">
 			<Navbar />
-			<QuoteBlock url="https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous"/>
+			<QuoteBlock url="https://andruxnet-random-famous-quotes.p.mashape.com/?cat="/>
 			</div>
 		);
 	}
