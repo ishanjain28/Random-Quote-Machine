@@ -115,8 +115,10 @@ var QuoteBlock = React.createClass({
 					<Quote quote={this.state.quote}/>
 					<Author author={this.state.author}/>
 					<Categories />
-					<NewQuote handleClick={this.updateView} />
-					<Tweet quote={this.state.quote} />
+					<div className="btnBlock">
+						<NewQuote handleClick={this.updateView} />
+						<Tweet quote={this.state.quote} />
+					</div>
 				</div>
 			</div>
 		);
@@ -126,7 +128,7 @@ var QuoteBlock = React.createClass({
 var NewQuote = React.createClass({
 	render: function () {
 		return (
-			<a className="btn new_quote" onClick={this.props.handleClick}>New Quote</a>
+			<a className="btn new_quote" href="#" onClick={this.props.handleClick}>New Quote</a>
 		);
 	}
 });
@@ -140,13 +142,26 @@ var Tweet = React.createClass({
 		);
 	}
 });
+
+var Footer = React.createClass({
+	render: function () {
+		return  (
+			<div className="footer">
+				<a href="mailto:ishanjain28@gmail.com" className="fbtn contact_btn">CONTACT</a>
+				<a href="https://github.com/ishanjain28/random-quote-machine" target="_blank" className="fbtn github_btn">GITHUB</a>
+				<a href="https://twitter.com/ishanjain28" className="fbtn twitter_btn">TWITTER</a>
+			</div>
+		);
+	}
+});
 //  The root container of the page.
 var RootElement = React.createClass({
 	render: function () {
 		return (
 			<div className="RootElement">
 			<Navbar />
-			<QuoteBlock url="https://andruxnet-random-famous-quotes.p.mashape.com/?cat="/>
+			<QuoteBlock url="https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous"/>
+			<Footer />
 			</div>
 		);
 	}
