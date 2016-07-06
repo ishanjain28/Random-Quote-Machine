@@ -1,0 +1,50 @@
+{
+  "name": "random-quotes",
+  "version": "1.0.0",
+  "description": "A web app to display Random Quotes",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishanjain28/Random-Quote-Machine.git"
+  },
+  "keywords": [
+    "Random",
+    "Quotes",
+    "react",
+    "react-dom",
+    "browserify"
+  ],
+  "author": "Ishan Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ishanjain28/Random-Quote-Machine/issues"
+  },
+  "homepage": "https://github.com/ishanjain28/Random-Quote-Machine#readme",
+  "dependencies": {
+    "eslint": "^3.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "jquery": "^3.0.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "jquery": "^3.0.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "reactify": "^1.1.1"
+  }
+}

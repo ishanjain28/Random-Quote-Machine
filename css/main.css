@@ -1,0 +1,93 @@
+body   {
+    background: green;
+    margin: 0;
+    padding: 0;
+}
+.root   {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+.navbar {
+    margin: 0;
+    padding: 15px;
+    background: #fff;
+    font-size: 3em;
+    font-family: sans-serif;    
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+}
+.header {
+    margin: 5px;
+    padding: 5px;
+}
+.QuoteWrapper   {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background: #f00;
+}
+.QuoteBox   {
+    background: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 20px;
+}
+.quote  {
+    font-size: 3em;
+    text-align: left;
+    display: block;
+    margin: 10px;
+}
+.author {
+    font-size: 2em;
+    text-align: right;
+    display: block;
+    margin: 10px;
+}
+.ButtonBox  {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.newquote   {
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    background: #0f0;
+    margin: 10px;
+}
+.tweet  {
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    background: #00f;
+    margin: 10px;
+}
+.categoryUL {
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+.categoryLI {
+    margin: 10px;
+    font-size: 1.5em;
+}
+.categoryLI:hover   {
+    color: rgba(30, 30, 30, 0.6);
+}
+.categoryLIActive   {
+    color: rgba(100, 0, 100, 0.5);
+}
