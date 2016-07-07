@@ -172,13 +172,32 @@ const Tweet = React.createClass({
         );
     }
 });
-
+const Footer = React.createClass({
+    render: function () {
+        return (
+            <div className="footerWrapper">
+                <div className="footer">
+                    <div className="contact">
+                        <a className="contactElement footercolor" href="mailto:ishanjain28@gmail.com">Contact</a>
+                        <a className="contactElement footercolor" href="https://github.com/ishanjain28/random-quote-machine">Github</a>
+                        <a className="contactElement footercolor" href="https://twitter.com/ishanjain28">Twitter</a>
+                    </div>
+                    <div className="sources">
+                        <u><a className="sourceElement footercolor" href="https://market.mashape.com/andruxnet/random-famous-quotes">Random Quote API from Mashape</a></u>
+                        <u><a className="sourceElement footercolor" href="http://quotes.stormconsultancy.co.uk/">Programming Quotes</a></u>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
 const App = React.createClass({
     render: function () {
         return (
             <div className="app">
                 <Navbar />
                 <QuoteWrapper />
+                <Footer />
             </div>
         );
     }

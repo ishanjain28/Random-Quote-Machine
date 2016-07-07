@@ -133,3 +133,42 @@ body   {
     font-size: 1.5em;
     color: #000;
 }
+.footerWrapper  {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+
+}
+.footer {
+    background: #fff;
+    padding: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contactElement    {
+    margin: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    transition: 0.5s;
+}
+.contactElement:hover   {
+    letter-spacing: 1px;
+}
+.sourceElement  {
+    font-size: 15px;
+    margin: 5px;
+    text-decoration: none;
+}
+.footercolor    {
+    color: #000;
+}
+.footercolor:hover  {
+    color: #fff;
+    background: #000;
+}

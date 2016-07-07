@@ -30398,18 +30398,38 @@ const Tweet = React.createClass({displayName: "Tweet",
         );
     }
 });
-
+const Footer = React.createClass({displayName: "Footer",
+    render: function () {
+        return (
+            React.createElement("div", {className: "footerWrapper"}, 
+                React.createElement("div", {className: "footer"}, 
+                    React.createElement("div", {className: "contact"}, 
+                        React.createElement("a", {className: "contactElement footercolor", href: "mailto:ishanjain28@gmail.com"}, "Contact"), 
+                        React.createElement("a", {className: "contactElement footercolor", href: "https://github.com/ishanjain28/random-quote-machine"}, "Github"), 
+                        React.createElement("a", {className: "contactElement footercolor", href: "https://twitter.com/ishanjain28"}, "Twitter")
+                    ), 
+                    React.createElement("div", {className: "sources"}, 
+                        React.createElement("u", null, React.createElement("a", {className: "sourceElement footercolor", href: "https://market.mashape.com/andruxnet/random-famous-quotes"}, "Random Quote API from Mashape")), 
+                        React.createElement("u", null, React.createElement("a", {className: "sourceElement footercolor", href: "http://quotes.stormconsultancy.co.uk/"}, "Programming Quotes"))
+                    )
+                )
+            )
+        )
+    }
+});
 const App = React.createClass({displayName: "App",
     render: function () {
         return (
             React.createElement("div", {className: "app"}, 
                 React.createElement(Navbar, null), 
-                React.createElement(QuoteWrapper, null)
+                React.createElement(QuoteWrapper, null), 
+                React.createElement(Footer, null)
             )
         );
     }
 })
 module.exports = App;
+
 
 },{"jquery":27,"react":169}],171:[function(require,module,exports){
 var React = require('react');
@@ -30417,6 +30437,7 @@ var ReactDOM = require('react-dom');
 var App = require('./App.jsx');
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+
 
 },{"./App.jsx":170,"react":169,"react-dom":29}],172:[function(require,module,exports){
 // shim for using process in browser
