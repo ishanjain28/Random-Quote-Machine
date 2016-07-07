@@ -35,14 +35,14 @@ const QuoteBox = React.createClass({
         });
 
         var selector = '#' + category;
-        
+
         var categoryArr = ['movies', 'famous', 'programming'];
 
         categoryArr.forEach(function (val) {
-            if(val == category) {
-            selector = '#' + val;
-            $(selector).css("color", "#000");        
-            } else  {
+            if (val == category) {
+                selector = '#' + val;
+                $(selector).css("color", "#000");
+            } else {
                 selector = '#' + val;
                 $(selector).css('color', "grey");
             }
@@ -116,19 +116,6 @@ const QuoteBox = React.createClass({
             });
         }
     },
-    tweetIt: function () {
-        var quote = this.state.quote;
-        var author = this.state.author;
-        var url = "https://twitter.com/intent/tweet?text=" + quote
-        if (quote.length + author.length < 160) {
-            url = "https://twitter.com/intent/tweet?text=" + quote + ' -' + author;
-        } else {
-            return url;
-        }
-
-        $('.tweetButton').attr('href', url);
-
-    },
     render: function () {
         return (
             <div className="QuoteBox">
@@ -149,7 +136,7 @@ const QuoteBox = React.createClass({
                 </div>
                 <div className="ButtonBox">
                     <NewQuote getNewQuote={this.getNewQuote} />
-                    <Tweet tweetIt={this.tweetIt} />
+                    <Tweet quote={this.state.quote} author={this.state.author} />
                 </div>
             </div>
         );
@@ -168,9 +155,17 @@ const NewQuote = React.createClass({
 
 const Tweet = React.createClass({
     render: function () {
+        var quote = this.props.quote;
+        var author = this.props.author;
+        var url = "https://twitter.com/intent/tweet?text=" + quote
+        if (quote.length + author.length < 160) {
+            url = "https://twitter.com/intent/tweet?text=" + quote + ' -' + author;
+        } else {
+            url = "https://twitter.com/intent/tweet?text=" + quote;
+        }
         return (
-            <a href="#" target="_blank" className="tweetButton">
-                <div className="tweet" onClick={this.props.tweetIt}>
+            <a href={url} target="_blank" className="tweetButton">
+                <div className="tweet">
                     Tweet
                 </div>
             </a>

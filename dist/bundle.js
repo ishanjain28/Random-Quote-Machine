@@ -30261,14 +30261,14 @@ const QuoteBox = React.createClass({displayName: "QuoteBox",
         });
 
         var selector = '#' + category;
-        
+
         var categoryArr = ['movies', 'famous', 'programming'];
 
         categoryArr.forEach(function (val) {
-            if(val == category) {
-            selector = '#' + val;
-            $(selector).css("color", "#000");        
-            } else  {
+            if (val == category) {
+                selector = '#' + val;
+                $(selector).css("color", "#000");
+            } else {
                 selector = '#' + val;
                 $(selector).css('color', "grey");
             }
@@ -30342,19 +30342,6 @@ const QuoteBox = React.createClass({displayName: "QuoteBox",
             });
         }
     },
-    tweetIt: function () {
-        var quote = this.state.quote;
-        var author = this.state.author;
-        var url = "https://twitter.com/intent/tweet?text=" + quote
-        if (quote.length + author.length < 160) {
-            url = "https://twitter.com/intent/tweet?text=" + quote + ' -' + author;
-        } else {
-            return url;
-        }
-
-        $('.tweetButton').attr('href', url);
-
-    },
     render: function () {
         return (
             React.createElement("div", {className: "QuoteBox"}, 
@@ -30375,7 +30362,7 @@ const QuoteBox = React.createClass({displayName: "QuoteBox",
                 ), 
                 React.createElement("div", {className: "ButtonBox"}, 
                     React.createElement(NewQuote, {getNewQuote: this.getNewQuote}), 
-                    React.createElement(Tweet, {tweetIt: this.tweetIt})
+                    React.createElement(Tweet, {quote: this.state.quote, author: this.state.author})
                 )
             )
         );
@@ -30394,9 +30381,17 @@ const NewQuote = React.createClass({displayName: "NewQuote",
 
 const Tweet = React.createClass({displayName: "Tweet",
     render: function () {
+        var quote = this.props.quote;
+        var author = this.props.author;
+        var url = "https://twitter.com/intent/tweet?text=" + quote
+        if (quote.length + author.length < 160) {
+            url = "https://twitter.com/intent/tweet?text=" + quote + ' -' + author;
+        } else {
+            url = "https://twitter.com/intent/tweet?text=" + quote;
+        }
         return (
-            React.createElement("a", {href: "#", target: "_blank", className: "tweetButton"}, 
-                React.createElement("div", {className: "tweet", onClick: this.props.tweetIt}, 
+            React.createElement("a", {href: url, target: "_blank", className: "tweetButton"}, 
+                React.createElement("div", {className: "tweet"}, 
                     "Tweet"
                 )
             )
@@ -30416,14 +30411,12 @@ const App = React.createClass({displayName: "App",
 })
 module.exports = App;
 
-
 },{"jquery":27,"react":169}],171:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var App = require('./App.jsx');
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
-
 
 },{"./App.jsx":170,"react":169,"react-dom":29}],172:[function(require,module,exports){
 // shim for using process in browser
