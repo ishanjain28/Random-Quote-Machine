@@ -19,9 +19,6 @@ const QuoteWrapper = React.createClass({
             category: 'programming'
         }
     },
-    getCategory: function () {
-
-    },
     render: function () {
         return (
             <div className="QuoteWrapper">
@@ -38,10 +35,6 @@ const QuoteWrapper = React.createClass({
 
 const QuoteBox = React.createClass({
     render: function () {
-        $('.categoryLI li').on('click', function () {
-            var activeCategory = 'categoryLI ' + this.props.category + ' categoryLIActive';
-                $('li').addClass(activeCategory);
-        });
         return (
             <div className="QuoteBox">
             <div className="quote">
@@ -50,7 +43,7 @@ const QuoteBox = React.createClass({
             <div className="author">
                 <i>-{this.props.author}</i>
             </div>
-            <div className="category" onClick={this.props.category}>
+            <div className="category">
             <i>
                 <ul className="categoryUL">
                     <li className="categoryLI movies">#movies</li>
@@ -82,7 +75,7 @@ const Tweet = React.createClass({
     render: function () {
         return (
             <div className="tweet">
-                tweet
+                Tweet
             </div>
         );
     }

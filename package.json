@@ -2,8 +2,9 @@
   "name": "random-quotes",
   "version": "1.0.0",
   "description": "A web app to display Random Quotes",
+  "start": "node server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "watchify -v -t reactify src/index.jsx -o dist/bundle.js"
   },
   "browserify": {
     "transform": [
@@ -26,7 +27,7 @@
     "react-dom",
     "browserify"
   ],
-  "author": "Ishan Jain",
+  "author": "Ishan Jain <ishanjain28@gmail.com> ",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ishanjain28/Random-Quote-Machine/issues"
@@ -42,6 +43,7 @@
   "devDependencies": {
     "eslint": "^3.0.1",
     "eslint-plugin-react": "^5.2.2",
+    "express": "^4.14.0",
     "jquery": "^3.0.0",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
