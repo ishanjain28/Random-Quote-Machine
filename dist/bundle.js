@@ -30228,60 +30228,155 @@ var React = require('react');
 var $ = require('jquery');
 
 const Navbar = React.createClass({displayName: "Navbar",
-	render: function () {
-		return (
-			React.createElement("div", {className: "navbar"}, 
-			React.createElement("p", {className: "header"}, "RANDOM QUOTES")
-		)
-		);
-	}
+    render: function () {
+        return (
+            React.createElement("div", {className: "navbar"}, 
+                React.createElement("p", {className: "header"}, "RANDOM QUOTES")
+            )
+        );
+    }
 });
 
 const QuoteWrapper = React.createClass({displayName: "QuoteWrapper",
-    getInitialState: function() {
-        return {
-            quote: 'Quote here',
-            author: 'Who said it?',
-            category: 'programming'
-        }
-    },
     render: function () {
         return (
             React.createElement("div", {className: "QuoteWrapper"}, 
-                React.createElement(QuoteBox, {
-                    quote: this.state.quote, 
-                    author: this.state.author, 
-                    getCategory: this.getCategory, 
-                    category: this.state.category}
-                )
+                React.createElement(QuoteBox, null)
             )
         );
     }
 });
 
 const QuoteBox = React.createClass({displayName: "QuoteBox",
+    getInitialState: function () {
+        return {
+            quote: 'Quote here',
+            author: 'Who said it?',
+            category: 'programming'
+        }
+    },
+    handleCategory: function (category) {
+        this.setState({
+            category: category
+        });
+
+        var selector = '#' + category;
+        
+        var categoryArr = ['movies', 'famous', 'programming'];
+
+        categoryArr.forEach(function (val) {
+            if(val == category) {
+            selector = '#' + val;
+            $(selector).css("color", "#000");        
+            } else  {
+                selector = '#' + val;
+                $(selector).css('color', "grey");
+            }
+        })
+    },
+    componentWillMount: function () {
+
+        var URL = "http://quotes.stormconsultancy.co.uk/random.json";
+        $.ajax({
+            url: URL,
+            dataType: 'jsonp',
+            cache: true,
+            success: function (data) {
+
+                this.setState({ quote: data['quote'], author: data['author'] });
+
+                var colors = ["#f78822", "#4a742c", "#e12828", "#FEC202", "#DA2021", "#527AC0", "#13ACD8", "#689550", "#E53059", "#6E4C96"],
+                    currentColor = Math.floor(Math.random() * (colors.length - 1));
+
+                $('.QuoteWrapper').css('background', colors[currentColor]);
+                var newquotebgcolor = 'linear-gradient(to bottom, ' + colors[currentColor] + ' 50%, #000 50%)';
+                $('.newquote').css('background-image', newquotebgcolor);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, err.toString());
+            }.bind(this)
+        });
+    },
+    getNewQuote: function () {
+        var URL = "http://quotes.stormconsultancy.co.uk/random.json";
+        if (this.state.category == "movies" || this.state.category == "famous") {
+            URL = "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=" + this.state.category;
+            $.ajax({
+                url: URL,
+                dataType: 'json',
+                cache: true,
+                headers: { 'X-Mashape-Key': 'j2rbmAvhvimshrTJkUHtmBEceNbgp1WJRG6jsnVVTDboDxcAIR', 'Cache-Control': 'max-age=1000' },
+                success: function (data) {
+
+                    this.setState({ quote: data['quote'], author: data['author'] });
+
+                    var colors = ["#f78822", "#4a742c", "#e12828", "#FEC202", "#DA2021", "#527AC0", "#13ACD8", "#689550", "#E53059", "#6E4C96"],
+                        currentColor = Math.floor(Math.random() * (colors.length - 1));
+
+                    $('.QuoteWrapper').css('background', colors[currentColor]);
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error(this.props.url, err.toString());
+                }.bind(this)
+            });
+        }
+        if (this.state.category == "programming") {
+            $.ajax({
+                url: URL,
+                dataType: 'jsonp',
+                cache: true,
+                success: function (data) {
+
+                    this.setState({ quote: data['quote'], author: data['author'] });
+
+                    var colors = ["#f78822", "#4a742c", "#e12828", "#FEC202", "#DA2021", "#527AC0", "#13ACD8", "#689550", "#E53059", "#6E4C96"],
+                        currentColor = Math.floor(Math.random() * (colors.length - 1));
+
+                    $('.QuoteWrapper').css('background', colors[currentColor]);
+                    var newquotebgcolor = 'linear-gradient(to bottom, ' + colors[currentColor] + ' 50%, #000 50%)';
+                    $('.newquote').css('background-image', newquotebgcolor);
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error(this.props.url, err.toString());
+                }.bind(this)
+            });
+        }
+    },
+    tweetIt: function () {
+        var quote = this.state.quote;
+        var author = this.state.author;
+        var url = "https://twitter.com/intent/tweet?text=" + quote
+        if (quote.length + author.length < 160) {
+            url = "https://twitter.com/intent/tweet?text=" + quote + ' -' + author;
+        } else {
+            return url;
+        }
+
+        $('.tweetButton').attr('href', url);
+
+    },
     render: function () {
         return (
             React.createElement("div", {className: "QuoteBox"}, 
-            React.createElement("div", {className: "quote"}, 
-                this.props.quote
-            ), 
-            React.createElement("div", {className: "author"}, 
-                React.createElement("i", null, "-", this.props.author)
-            ), 
-            React.createElement("div", {className: "category"}, 
-            React.createElement("i", null, 
-                React.createElement("ul", {className: "categoryUL"}, 
-                    React.createElement("li", {className: "categoryLI movies"}, "#movies"), 
-                    React.createElement("li", {className: "categoryLI famous"}, "#famous"), 
-                    React.createElement("li", {className: "categoryLI programming"}, "#programming")
+                React.createElement("div", {className: "quote"}, 
+                    this.state.quote
+                ), 
+                React.createElement("div", {className: "author"}, 
+                    React.createElement("i", null, "-", this.state.author)
+                ), 
+                React.createElement("div", {className: "category"}, 
+                    React.createElement("i", null, 
+                        React.createElement("ul", {className: "categoryUL"}, 
+                            React.createElement("li", {className: "categoryLI movies", id: "movies", onClick: function()  { this.handleCategory('movies') }.bind(this)}, "#movies"), 
+                            React.createElement("li", {className: "categoryLI famous", id: "famous", onClick: function()  { this.handleCategory('famous') }.bind(this)}, "#famous"), 
+                            React.createElement("li", {className: "categoryLI programming", id: "programming", onClick: function()  { this.handleCategory('programming') }.bind(this)}, "#programming")
+                        )
+                    )
+                ), 
+                React.createElement("div", {className: "ButtonBox"}, 
+                    React.createElement(NewQuote, {getNewQuote: this.getNewQuote}), 
+                    React.createElement(Tweet, {tweetIt: this.tweetIt})
                 )
-            )
-            ), 
-            React.createElement("div", {className: "ButtonBox"}, 
-                React.createElement(NewQuote, null), 
-                React.createElement(Tweet, null)
-            )
             )
         );
     }
@@ -30290,7 +30385,7 @@ const QuoteBox = React.createClass({displayName: "QuoteBox",
 const NewQuote = React.createClass({displayName: "NewQuote",
     render: function () {
         return (
-            React.createElement("div", {className: "newquote"}, 
+            React.createElement("div", {className: "newquote", onClick: this.props.getNewQuote}, 
                 "New Quote"
             )
         );
@@ -30300,8 +30395,10 @@ const NewQuote = React.createClass({displayName: "NewQuote",
 const Tweet = React.createClass({displayName: "Tweet",
     render: function () {
         return (
-            React.createElement("div", {className: "tweet"}, 
-                "Tweet"
+            React.createElement("a", {href: "#", target: "_blank", className: "tweetButton"}, 
+                React.createElement("div", {className: "tweet", onClick: this.props.tweetIt}, 
+                    "Tweet"
+                )
             )
         );
     }
