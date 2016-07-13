@@ -128,8 +128,8 @@ const QuoteBox = React.createClass({
                 <div className="category">
                     <i>
                         <ul className="categoryUL">
-                            <li className="categoryLI movies" id="movies" onClick={() => { this.handleCategory('movies') } }>#movies</li>
-                            <li className="categoryLI famous" id="famous" onClick={() => { this.handleCategory('famous') } }>#famous</li>
+                            <li style={{'color': 'grey'}} className="categoryLI movies" id="movies" onClick={() => { this.handleCategory('movies') } }>#movies</li>
+                            <li style={{'color': 'grey'}} className="categoryLI famous" id="famous" onClick={() => { this.handleCategory('famous') } }>#famous</li>
                             <li className="categoryLI programming" id="programming" onClick={() => { this.handleCategory('programming') } }>#programming</li>
                         </ul>
                     </i>
