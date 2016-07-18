@@ -21,6 +21,7 @@ const QuoteWrapper = React.createClass({
     }
 });
 
+
 const QuoteBox = React.createClass({
     getInitialState: function () {
         return {
@@ -36,7 +37,7 @@ const QuoteBox = React.createClass({
 
         var selector = '#' + category;
 
-        var categoryArr = ['movies', 'famous', 'programming'];
+        var categoryArr = ['movies', 'famous', 'programming', 'sarcastic'];
 
         categoryArr.forEach(function (val) {
             if (val == category) {
@@ -115,6 +116,26 @@ const QuoteBox = React.createClass({
                 }.bind(this)
             });
         }
+        if (this.state.category == "sarcastic") {
+            var sarcasticJSON = require('./sarcasm.json');
+
+            try {
+                var obj = sarcasticJSON[Math.floor(Math.random() * sarcasticJSON.length)];
+                this.setState({
+                    quote: obj.quote,
+                    author: obj.author
+                });
+
+                var colors = ["#f78822", "#4a742c", "#e12828", "#FEC202", "#DA2021", "#527AC0", "#13ACD8", "#689550", "#E53059", "#6E4C96"],
+                    currentColor = Math.floor(Math.random() * (colors.length - 1));
+
+                $('.QuoteWrapper').css('background', colors[currentColor]);
+                var newquotebgcolor = 'linear-gradient(to bottom, ' + colors[currentColor] + ' 50%, #000 50%)';
+                $('.newquote').css('background-image', newquotebgcolor);
+            } catch (e) {
+                console.log(e.code + ' ' + e.msg);
+            }
+        }
     },
     render: function () {
         return (
@@ -128,8 +149,9 @@ const QuoteBox = React.createClass({
                 <div className="category">
                     <i>
                         <ul className="categoryUL">
-                            <li style={{'color': 'grey'}} className="categoryLI movies" id="movies" onClick={() => { this.handleCategory('movies') } }>#movies</li>
-                            <li style={{'color': 'grey'}} className="categoryLI famous" id="famous" onClick={() => { this.handleCategory('famous') } }>#famous</li>
+                            <li style={{ 'color': 'grey' }} className="categoryLI movies" id="movies" onClick={() => { this.handleCategory('movies') } }>#movies</li>
+                            <li style={{ 'color': 'grey' }} className="categoryLI famous" id="famous" onClick={() => { this.handleCategory('famous') } }>#famous</li>
+                            <li style={{ 'color': 'grey' }} className="categoryLI sarcastic" id="sarcastic" onClick={() => { this.handleCategory('sarcastic') } }>#sarcastic</li>
                             <li className="categoryLI programming" id="programming" onClick={() => { this.handleCategory('programming') } }>#programming</li>
                         </ul>
                     </i>
